@@ -138,4 +138,66 @@ async function fetchInfoGeneral() {
 // Cargar datos al iniciar la página
 document.addEventListener('DOMContentLoaded', () => {
   fetchInfoGeneral();
+  fetchRegiones();
 });
+
+// ==========================================
+// FETCH API - Regiones de Colombia
+// ==========================================
+
+async function fetchRegiones() {
+  const endpoint = 'https://api-colombia.com/api/v1/Region';
+  const container = document.getElementById('regiones-grid');
+  
+  if (!container) return;
+  
+  try {
+    container.innerHTML = '<p>Cargando regiones...</p>';
+    
+    const response = await fetch(endpoint);
+    
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const regiones = data;
+    
+    if (!regiones || regiones.length === 0) {
+      container.innerHTML = '<p>No se encontraron regiones.</p>';
+      return;
+    }
+    
+    // Mapeo de nombres a archivos de imagen
+    const imageMap = {
+      'Caribe': 'region-caribe.jpg',
+      'Pacífico': 'region-pacifico.jpg',
+      'Orinoquía': 'region-orinoquia.jpg',
+      'Amazonía': 'region-amazonia.jpg',
+      'Andina': 'region-andina.jpg',
+      'Insular': 'region-insular.jpg'
+    };
+    
+    // Crear HTML para cada región con imagen
+    const regionesHTML = regiones.map(region => {
+      const imageName = imageMap[region.name] || 'placeholder.jpg';
+      return `
+        <article class="region-card">
+          <img src="assets/${imageName}" alt="Imagen de la región ${region.name}" class="region-img" loading="lazy" />
+          <div class="region-content">
+            <h3>${region.name}</h3>
+            <p>${region.description || 'Sin descripción disponible.'}</p>
+          </div>
+        </article>
+      `;
+    }).join('');
+    
+    container.innerHTML = regionesHTML;
+    
+    console.log('✅ Regiones cargadas:', regiones.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar regiones:', error);
+    container.innerHTML = '<p>Error al cargar las regiones. Por favor, intenta recargar la página.</p>';
+  }
+}

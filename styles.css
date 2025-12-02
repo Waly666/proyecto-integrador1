@@ -32,14 +32,16 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial;
+  font-family: 'Exo', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
   color: var(--text);
   background: var(--bg);
 }
 img { max-width: 100%; display: block; }
-h1, h2, h3 { line-height: 1.2; margin: 0 0 .5rem; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 5rem; }
+h2 { font: size 25px;rem; font-weight: 700; }
 p { margin: .5rem 0 1rem; }
+#resumen-pais { text-align: justify; }
 ul { padding: 0; margin: 0; list-style: none; }
 
 /* =====================
@@ -143,7 +145,8 @@ main section {
   margin: 1.5rem 0;
 }
 main section > header h2 {
-  font-size: 1.35rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.25rem;
 }
 
 /* Grids para listas */
@@ -239,6 +242,66 @@ dl {
 }
 dt { font-weight: 700; }
 dd { margin: 0; color: var(--muted); }
+
+/* Grid de regiones */
+.regiones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.region-card {
+  background: var(--card);
+  border-radius: .85rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.region-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.15);
+}
+
+.region-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.region-content {
+  padding: 1.5rem;
+}
+
+.region-card h3 {
+  color: var(--accent);
+  margin: 0 0 .75rem 0;
+  font-size: 1.3rem;
+}
+
+.region-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  text-align: justify;
+}
+
+@media (min-width: 768px) {
+  .regiones-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .regiones-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 /* Formulario de búsqueda */
 form[role="search"] {

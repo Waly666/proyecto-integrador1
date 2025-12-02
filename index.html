@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Colombia — Información, Regiones, Departamentos, Sitios turísticos y Platos típicos</title>
     <meta name="description" content="Portal informativo de Colombia con datos generales, regiones, departamentos, sitios turísticos y platos típicos." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;500;600;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -106,23 +109,9 @@
         </header>
         <p>Listado de regiones naturales y administrativas de Colombia.</p>
 
-        <ul data-endpoint="https://api-colombia.com/api/v1/Region" aria-live="polite">
-          <li>
-            <article>
-              <h3>Nombre de la región</h3>
-              <p>Descripción breve de la región.</p>
-            </article>
-          </li>
-        </ul>
-
-        <template id="tpl-region">
-          <li>
-            <article>
-              <h3></h3>
-              <p></p>
-            </article>
-          </li>
-        </template>
+        <div id="regiones-grid" class="regiones-grid" aria-live="polite">
+          <p>Cargando regiones...</p>
+        </div>
       </section>
 
       <section id="departamentos">
