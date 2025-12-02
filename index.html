@@ -4,22 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Colombia — Información, Regiones, Departamentos, Sitios turísticos y Platos típicos</title>
-    <meta name="description" content="Portal informativo de Colombia con datos generales, regiones, departamentos, sitios turísticos y platos típicos." />
+    <meta name="description" content="Página web con acceso a la API pública de api-colombia.com que ofrece información completa y actualizada de Colombia: departamentos, regiones, ciudades, atractivos turísticos y gastronomía típica. Ideal para usos educativos, investigación y planificación de viajes." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;500;600;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Botón modo oscuro / claro -->
+    <button id="toggle-tema" type="button" aria-label="Cambiar tema" title="Cambiar tema">
+      <span class="theme-icon">🌙</span>
+    </button>
+
     <!-- ENCABEZADO PRINCIPAL -->
     <header>
       <h1>Proyecto Colombia</h1>
-      <p>Explora información general, regiones, departamentos, sitios turísticos y platos típicos.</p>
-
-      <!-- Botón modo oscuro / claro -->
-      <button id="toggle-tema" type="button" aria-label="Cambiar tema" title="Cambiar tema">
-        <span class="theme-icon">🌙</span>
-      </button>
+      
 
       <!-- Navegación principal -->
       <nav aria-label="Secciones principales">
@@ -31,10 +31,28 @@
           <li><a href="#platos-tipicos">Platos típicos</a></li>
         </ul>
       </nav>
+
+      
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main id="contenido">
+      <!-- Barra lateral de navegación -->
+      <aside class="sidebar-nav">
+        <nav aria-label="Navegación lateral">
+          <h2>Secciones</h2>
+          <ul>
+            <li><a href="#informacion-general">Información general</a></li>
+            <li><a href="#regiones">Regiones</a></li>
+            <li><a href="#departamentos">Departamentos</a></li>
+            <li><a href="#sitios-turisticos">Sitios turísticos</a></li>
+            <li><a href="#platos-tipicos">Platos típicos</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Contenido de las secciones -->
+      <div class="main-content">
       <section id="informacion-general">
         <header>
           <h2>Información general</h2>
@@ -46,7 +64,7 @@
         </figure>
 
         <article>
-          <h3>Resumen</h3>
+          <h3>Descripción</h3>
           <p id="resumen-pais">Cargando descripción...</p>
 
           <div class="stats-grid" data-endpoint="https://api-colombia.com/api/v1/Country/Colombia" aria-live="polite">
@@ -138,6 +156,17 @@
         </header>
         <p>Principales atractivos turísticos del país.</p>
 
+        <form role="search" id="search-sitios">
+          <label for="input-search-sitios" class="visually-hidden">Buscar sitio turístico</label>
+          <input 
+            type="search" 
+            id="input-search-sitios" 
+            placeholder="Buscar sitio turístico por nombre o ciudad..."
+            aria-label="Buscar sitio turístico"
+          />
+          <button type="submit">Buscar</button>
+        </form>
+
         <div id="sitios-turisticos-list" class="sitios-grid" aria-live="polite">
           <p>Cargando sitios turísticos...</p>
         </div>
@@ -149,10 +178,22 @@
         </header>
         <p>Gastronomía representativa por región y departamento.</p>
 
+        <form role="search" id="search-platos">
+          <label for="input-search-platos" class="visually-hidden">Buscar plato típico</label>
+          <input 
+            type="search" 
+            id="input-search-platos" 
+            placeholder="Buscar plato típico por nombre o departamento..."
+            aria-label="Buscar plato típico"
+          />
+          <button type="submit">Buscar</button>
+        </form>
+
         <div id="platos-tipicos-list" class="platos-grid" aria-live="polite">
           <p>Cargando platos típicos...</p>
         </div>
       </section>
+      </div> <!-- Cierre de main-content -->
     </main>
 
     <footer>

@@ -145,6 +145,36 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchDepartamentos();
   fetchSitiosTuristicos();
   fetchPlatosTipicos();
+  
+  // Event listener para búsqueda de sitios turísticos
+  const searchSitiosForm = document.getElementById('search-sitios');
+  const searchSitiosInput = document.getElementById('input-search-sitios');
+  
+  if (searchSitiosForm && searchSitiosInput) {
+    searchSitiosForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      renderSitiosTuristicos(searchSitiosInput.value);
+    });
+    
+    searchSitiosInput.addEventListener('input', (e) => {
+      renderSitiosTuristicos(e.target.value);
+    });
+  }
+  
+  // Event listener para búsqueda de platos típicos
+  const searchPlatosForm = document.getElementById('search-platos');
+  const searchPlatosInput = document.getElementById('input-search-platos');
+  
+  if (searchPlatosForm && searchPlatosInput) {
+    searchPlatosForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      renderPlatosTipicos(searchPlatosInput.value);
+    });
+    
+    searchPlatosInput.addEventListener('input', (e) => {
+      renderPlatosTipicos(e.target.value);
+    });
+  }
 });
 
 // ==========================================
@@ -320,7 +350,9 @@ async function fetchRegiones() {
 }
 
 // === Función para cargar sitios turísticos ===
-async function fetchSitiosTuristicos() {
+let sitiosTuristicosData = [];
+
+async function fetchSitiosTuristicos(searchTerm = '') {
   const container = document.getElementById('sitios-turisticos-list');
   if (!container) return;
   
@@ -333,9 +365,38 @@ async function fetchSitiosTuristicos() {
     }
     
     const data = await response.json();
+    sitiosTuristicosData = data;
     
-    // Renderizar sitios turísticos
-    const sitiosHTML = data.map(sitio => {
+    renderSitiosTuristicos(searchTerm);
+    
+    console.log('✅ Sitios turísticos cargados:', data.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar sitios turísticos:', error);
+    container.innerHTML = '<p>Error al cargar los sitios turísticos. Por favor, intenta recargar la página.</p>';
+  }
+}
+
+function renderSitiosTuristicos(searchTerm = '') {
+  const container = document.getElementById('sitios-turisticos-list');
+  if (!container) return;
+  
+  let filteredData = sitiosTuristicosData;
+  
+  if (searchTerm) {
+    const search = searchTerm.toLowerCase();
+    filteredData = sitiosTuristicosData.filter(sitio => 
+      sitio.name.toLowerCase().includes(search) ||
+      (sitio.city && sitio.city.name && sitio.city.name.toLowerCase().includes(search))
+    );
+  }
+  
+  if (filteredData.length === 0) {
+    container.innerHTML = '<p class="no-results">No se encontraron sitios turísticos que coincidan con tu búsqueda.</p>';
+    return;
+  }
+  
+  const sitiosHTML = filteredData.map(sitio => {
       // Validar y obtener imagen correcta
       let imagen = 'assets/img_header_1.jpg';
       if (sitio.images && sitio.images.length > 0) {
@@ -378,17 +439,12 @@ async function fetchSitiosTuristicos() {
     }).join('');
     
     container.innerHTML = sitiosHTML;
-    
-    console.log('✅ Sitios turísticos cargados:', data.length);
-    
-  } catch (error) {
-    console.error('❌ Error al cargar sitios turísticos:', error);
-    container.innerHTML = '<p>Error al cargar los sitios turísticos. Por favor, intenta recargar la página.</p>';
-  }
 }
 
 // === Función para cargar platos típicos ===
-async function fetchPlatosTipicos() {
+let platosTipicosData = [];
+
+async function fetchPlatosTipicos(searchTerm = '') {
   const container = document.getElementById('platos-tipicos-list');
   if (!container) return;
   
@@ -401,9 +457,38 @@ async function fetchPlatosTipicos() {
     }
     
     const data = await response.json();
+    platosTipicosData = data;
     
-    // Renderizar platos típicos
-    const platosHTML = data.map(plato => {
+    renderPlatosTipicos(searchTerm);
+    
+    console.log('✅ Platos típicos cargados:', data.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar platos típicos:', error);
+    container.innerHTML = '<p>Error al cargar los platos típicos. Por favor, intenta recargar la página.</p>';
+  }
+}
+
+function renderPlatosTipicos(searchTerm = '') {
+  const container = document.getElementById('platos-tipicos-list');
+  if (!container) return;
+  
+  let filteredData = platosTipicosData;
+  
+  if (searchTerm) {
+    const search = searchTerm.toLowerCase();
+    filteredData = platosTipicosData.filter(plato => 
+      plato.name.toLowerCase().includes(search) ||
+      (plato.department && plato.department.name && plato.department.name.toLowerCase().includes(search))
+    );
+  }
+  
+  if (filteredData.length === 0) {
+    container.innerHTML = '<p class="no-results">No se encontraron platos típicos que coincidan con tu búsqueda.</p>';
+    return;
+  }
+  
+  const platosHTML = filteredData.map(plato => {
       // Validar imagen
       let imagen = 'assets/img_header_1.jpg';
       if (plato.imageUrl && (plato.imageUrl.startsWith('http://') || plato.imageUrl.startsWith('https://'))) {
@@ -437,11 +522,4 @@ async function fetchPlatosTipicos() {
     }).join('');
     
     container.innerHTML = platosHTML;
-    
-    console.log('✅ Platos típicos cargados:', data.length);
-    
-  } catch (error) {
-    console.error('❌ Error al cargar platos típicos:', error);
-    container.innerHTML = '<p>Error al cargar los platos típicos. Por favor, intenta recargar la página.</p>';
-  }
 }

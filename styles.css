@@ -55,72 +55,152 @@ header, main, footer {
 
 main {
   padding: 2rem 2.5rem;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  align-items: start;
 }
 
-header {
-   
-    padding-top: 2rem; }
+/* Barra lateral de navegación */
+.sidebar-nav {
+  position: sticky;
+  top: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.sidebar-nav h2 {
+  font-size: 1.25rem;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+  text-align: left;
+}
+
+.sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav a {
+  display: block;
+  text-decoration: none;
+  color: var(--link);
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-align: left;
+}
+
+.sidebar-nav a:hover {
+  background: var(--card);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* Contenedor principal de secciones */
+.main-content {
+  min-width: 0;
+}
 
 /* Encabezado */
 header h1 {
   font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
-header p { color: var(--muted); }
+
+header p { 
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
 
 /* Botón de tema */
 #toggle-tema {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--card);
   color: var(--text);
-  padding: .65rem;
+  padding: 0;
   border-radius: 50%;
   cursor: pointer;
-  margin: .5rem 0 1rem;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  transition: transform 0.2s ease, background 0.2s ease;
+  width: 3.5rem;
+  height: 3.5rem;
+  transition: all 0.3s ease;
   box-shadow: var(--shadow);
 }
+
 #toggle-tema:hover {
   border-color: var(--accent);
-  transform: translateY(-2px);
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 8px 16px rgba(0,0,0,.2);
 }
+
 #toggle-tema:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
+
 .theme-icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   display: block;
   line-height: 1;
+  transition: transform 0.3s ease;
 }
+
+#toggle-tema:hover .theme-icon {
+  transform: rotate(-15deg);
+}
+
 /* Cambiar ícono según tema */
 [data-theme="light"] .theme-icon::before {
   content: "☀️";
 }
+
 [data-theme="dark"] .theme-icon::before {
   content: "🌙";
 }
+
 .theme-icon {
   font-style: normal;
 }
+
 [data-theme="light"] .theme-icon,
 [data-theme="dark"] .theme-icon {
   font-size: 0; /* ocultar emoji original */
 }
+
 [data-theme="light"] .theme-icon::before,
 [data-theme="dark"] .theme-icon::before {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 /* Navegación principal */
 nav[aria-label="Secciones principales"] ul {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: .5rem;
 }
 nav[aria-label="Secciones principales"] a {
@@ -172,6 +252,12 @@ section ul > li article {
 }
 section ul > li article h3 { margin-bottom: .25rem; }
 section ul > li article p { color: var(--muted); }
+
+/* Título h3 en artículos */
+article > h3 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
 
 /* Figuras / imágenes */
 figure { margin: 0 0 1rem; }
@@ -642,6 +728,18 @@ form[role="search"] button:hover {
    DISEÑO RESPONSIVO
    ========================================== */
 
+/* TABLET: 641px - 1024px */
+@media (max-width: 1024px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .sidebar-nav {
+    position: static;
+  }
+}
+
 /* MOBILE: 320px - 640px */
 @media (max-width: 640px) {
   /* Header */
@@ -824,25 +922,17 @@ form[role="search"] button:hover {
     grid-template-columns: repeat(3, 1fr);
   }
   
-  /* Regiones - 3 columnas */
+  /* Regiones - 2 columnas */
   .regiones-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  /* Departamentos, sitios y platos - 2 columnas (como está) */
+  /* Departamentos, sitios y platos - 2 columnas */
   .departamentos-grid,
   .sitios-grid,
   .platos-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
-  }
-  
-  /* En pantallas muy grandes (1440px+) - 3 columnas */
-  @media (min-width: 1440px) {
-    .sitios-grid,
-    .platos-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 }
 
