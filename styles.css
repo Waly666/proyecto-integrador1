@@ -2,15 +2,18 @@
    Variables de color
    ===================== */
 :root {
-  --bg: #f8fafc;            /* fondo claro */
-  --text: #0f172a;          /* texto principal */
-  --muted: #475569;         /* texto secundario */
-  --card: #ffffff;          /* superficies */
-  --border: #e2e8f0;        /* bordes y divisores */
-  --accent: #0ea5e9;        /* acento celeste */
-  --link: #0369a1;          /* enlaces */
-  --focus: #22c55e;         /* foco accesible */
-  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --bg: #ffffff;            /* fondo blanco puro */
+  --text: #0f172a;          /* texto principal oscuro */
+  --muted: #64748b;         /* texto secundario */
+  --card: #f8fafc;          /* superficies cards gris muy claro */
+  --border: #e2e8f0;        /* bordes sutiles */
+  --accent: #2563eb;        /* azul vibrante principal */
+  --accent-hover: #1d4ed8;  /* azul más oscuro para hover */
+  --accent-light: #dbeafe;  /* azul muy claro para fondos */
+  --link: #1e40af;          /* enlaces azul oscuro */
+  --focus: #3b82f6;         /* foco azul brillante */
+  --shadow: 0 1px 3px rgba(37, 99, 235, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
 }
 
 [data-theme="dark"] {
@@ -68,22 +71,24 @@ main {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
-  padding: 1rem;
-  box-shadow: var(--shadow);
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .sidebar-nav h2 {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   margin: 0 0 1rem 0;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   text-align: left;
+  color: var(--text);
 }
 
 .sidebar-nav ul {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -91,24 +96,46 @@ main {
 
 .sidebar-nav a {
   display: block;
+  position: relative;
   text-decoration: none;
-  color: var(--link);
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--border);
-  background: var(--bg);
+  color: var(--muted);
+  padding: 0.65rem 0.85rem;
   border-radius: 0.5rem;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  font-weight: 500;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
   text-align: left;
+  outline: none;
+}
+
+.sidebar-nav a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.2s ease;
 }
 
 .sidebar-nav a:hover {
-  background: var(--card);
-  border-color: var(--accent);
-  transform: translateX(4px);
+  background: var(--bg);
+  color: var(--accent);
+  padding-left: 1.25rem;
+}
+
+.sidebar-nav a:hover::before {
+  height: 70%;
+}
+
+.sidebar-nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Contenedor principal de secciones */
@@ -203,17 +230,33 @@ nav[aria-label="Secciones principales"] ul {
   justify-content: center;
   gap: .5rem;
 }
+
 nav[aria-label="Secciones principales"] a {
   display: inline-block;
+  position: relative;
   text-decoration: none;
   border: 1px solid var(--border);
-  background: var(--card);
+  background: var(--bg);
   color: var(--link);
-  padding: .45rem .75rem;
+  padding: .5rem 1rem;
   border-radius: .5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  outline: none;
 }
+
 nav[aria-label="Secciones principales"] a:hover {
+  background: var(--card);
   border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+nav[aria-label="Secciones principales"] a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Secciones */
@@ -277,26 +320,27 @@ figcaption {
 /* Grid de estadísticas - Diseño profesional tipo tarjetas */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
   margin: 1.5rem 0;
 }
 
 .stat-card {
-  background: var(--card);
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   padding: 1.25rem;
   border-radius: .85rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.15), 0 2px 4px -1px rgba(37, 99, 235, 0.1);
   display: flex;
   flex-direction: column;
   gap: .5rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .stat-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0,0,0,.12);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.25), 0 4px 8px -2px rgba(37, 99, 235, 0.15);
+  border-color: #93c5fd;
 }
 
 .stat-label {
@@ -445,8 +489,7 @@ form[role="search"] button:hover {
 /* Grid de departamentos */
 .departamentos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin: 1.5rem 0;
 }
@@ -492,24 +535,27 @@ form[role="search"] button:hover {
 /* Stats tipo cajitas como info general */
 .depto-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: .75rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   padding: 1rem 1.5rem 1.5rem;
 }
 
 .depto-stat {
-  background: var(--bg);
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   padding: .85rem;
   border-radius: .65rem;
-  border: 1px solid var(--border);
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 2px 4px -1px rgba(37, 99, 235, 0.1);
   display: flex;
   flex-direction: column;
   gap: .35rem;
-  transition: transform 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .depto-stat:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 4px 8px -2px rgba(37, 99, 235, 0.2);
 }
 
 .stat-label-small {
@@ -538,9 +584,8 @@ form[role="search"] button:hover {
    ========================================== */
 .sitios-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 2rem;
-  grid-auto-rows: 1fr;
   margin: 1.5rem 0;
 }
 
@@ -609,14 +654,22 @@ form[role="search"] button:hover {
 }
 
 .sitio-dato {
-  background: var(--bg);
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 2px 4px -1px rgba(37, 99, 235, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sitio-dato:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 4px 8px -2px rgba(37, 99, 235, 0.2);
 }
 
 .dato-label {
@@ -640,9 +693,8 @@ form[role="search"] button:hover {
    ========================================== */
 .platos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 2rem;
-  grid-auto-rows: 1fr;
   margin: 1.5rem 0;
 }
 
@@ -712,16 +764,44 @@ form[role="search"] button:hover {
 }
 
 .plato-dato {
-  background: var(--bg);
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid #bfdbfe;
+  box-shadow: 0 2px 4px -1px rgba(37, 99, 235, 0.1);
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.plato-dato:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 4px 8px -2px rgba(37, 99, 235, 0.2);
 }
 
 .plato-dato.full-width {
   grid-column: 1 / -1;
+}
+
+/* ==========================================
+   TEMA OSCURO - Cajitas de datos
+   ========================================== */
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .depto-stat,
+[data-theme="dark"] .sitio-dato,
+[data-theme="dark"] .plato-dato {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: var(--shadow);
+}
+
+[data-theme="dark"] .stat-card:hover,
+[data-theme="dark"] .depto-stat:hover,
+[data-theme="dark"] .sitio-dato:hover,
+[data-theme="dark"] .plato-dato:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 16px rgba(0,0,0,.4);
 }
 
 /* ==========================================
@@ -927,12 +1007,9 @@ form[role="search"] button:hover {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  /* Departamentos, sitios y platos - 2 columnas */
-  .departamentos-grid,
-  .sitios-grid,
-  .platos-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+  /* Stats grid - 3 columnas en desktop */
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
