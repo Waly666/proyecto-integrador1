@@ -1,6 +1,9 @@
 // Proyecto Integrador — index.js
 // Funcionalidad de tema dark/light
 
+// Constante de la API
+const API_BASE_URL = 'https://api-colombia.com/api/v1';
+
 const toggleButton = document.getElementById('toggle-tema');
 
 // Cargar tema guardado o usar preferencia del sistema
@@ -140,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchInfoGeneral();
   fetchRegiones();
   fetchDepartamentos();
+  fetchSitiosTuristicos();
 });
 
 // ==========================================
@@ -311,5 +315,73 @@ async function fetchRegiones() {
   } catch (error) {
     console.error('❌ Error al cargar regiones:', error);
     container.innerHTML = '<p>Error al cargar las regiones. Por favor, intenta recargar la página.</p>';
+  }
+}
+
+// === Función para cargar sitios turísticos ===
+async function fetchSitiosTuristicos() {
+  const container = document.getElementById('sitios-turisticos-list');
+  if (!container) return;
+  
+  try {
+    console.log('🔄 Cargando sitios turísticos...');
+    const response = await fetch(`${API_BASE_URL}/TouristicAttraction`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Renderizar sitios turísticos
+    const sitiosHTML = data.map(sitio => {
+      // Validar y obtener imagen correcta
+      let imagen = 'assets/img_header_1.jpg';
+      if (sitio.images && sitio.images.length > 0) {
+        const imgUrl = sitio.images[0];
+        // Validar si es una URL completa (http o https)
+        if (imgUrl && (imgUrl.startsWith('http://') || imgUrl.startsWith('https://'))) {
+          imagen = imgUrl;
+        }
+      }
+      
+      const nombreCiudad = sitio.city && sitio.city.name ? sitio.city.name : 'No disponible';
+      const latitud = sitio.latitude || 'N/A';
+      const longitud = sitio.longitude || 'N/A';
+      
+      return `
+        <article class="sitio-card">
+          <div class="sitio-image">
+            <img src="${imagen}" alt="${sitio.name}" onerror="this.src='assets/img_header_1.jpg'" />
+          </div>
+          <div class="sitio-content">
+            <h3>${sitio.name}</h3>
+            <p class="sitio-descripcion">${sitio.description}</p>
+            <div class="sitio-datos">
+              <div class="sitio-dato">
+                <span class="dato-label">Ciudad</span>
+                <span class="dato-value">${nombreCiudad}</span>
+              </div>
+              <div class="sitio-dato">
+                <span class="dato-label">Latitud</span>
+                <span class="dato-value">${latitud}</span>
+              </div>
+              <div class="sitio-dato">
+                <span class="dato-label">Longitud</span>
+                <span class="dato-value">${longitud}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+    
+    container.innerHTML = sitiosHTML;
+    
+    console.log('✅ Sitios turísticos cargados:', data.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar sitios turísticos:', error);
+    container.innerHTML = '<p>Error al cargar los sitios turísticos. Por favor, intenta recargar la página.</p>';
   }
 }

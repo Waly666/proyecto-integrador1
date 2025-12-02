@@ -133,39 +133,14 @@
 
       <section id="sitios-turisticos">
         <header>
-          <h2>Sitios turísticos</h2>
+          <img src="assets/turismo.jpg" alt="Sitios Turísticos de Colombia" class="header-image" />
+          <h2>Sitios Turísticos</h2>
         </header>
         <p>Principales atractivos turísticos del país.</p>
 
-        <ul data-endpoint="https://api-colombia.com/api/v1/TouristicAttraction" aria-live="polite">
-          <li>
-            <article>
-              <header>
-                <h3>Nombre del sitio</h3>
-              </header>
-              <figure>
-                <img src="" alt="Imagen ilustrativa del sitio turístico" />
-                <figcaption></figcaption>
-              </figure>
-              <p></p>
-            </article>
-          </li>
-        </ul>
-
-        <template id="tpl-atraccion">
-          <li>
-            <article>
-              <header>
-                <h3></h3>
-              </header>
-              <figure>
-                <img src="" alt="" />
-                <figcaption></figcaption>
-              </figure>
-              <p></p>
-            </article>
-          </li>
-        </template>
+        <div id="sitios-turisticos-list" class="sitios-grid" aria-live="polite">
+          <p>Cargando sitios turísticos...</p>
+        </div>
       </section>
 
       <section id="platos-tipicos">
