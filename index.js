@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchRegiones();
   fetchDepartamentos();
   fetchSitiosTuristicos();
+  fetchPlatosTipicos();
 });
 
 // ==========================================
@@ -383,5 +384,64 @@ async function fetchSitiosTuristicos() {
   } catch (error) {
     console.error('❌ Error al cargar sitios turísticos:', error);
     container.innerHTML = '<p>Error al cargar los sitios turísticos. Por favor, intenta recargar la página.</p>';
+  }
+}
+
+// === Función para cargar platos típicos ===
+async function fetchPlatosTipicos() {
+  const container = document.getElementById('platos-tipicos-list');
+  if (!container) return;
+  
+  try {
+    console.log('🔄 Cargando platos típicos...');
+    const response = await fetch(`${API_BASE_URL}/TypicalDish`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Renderizar platos típicos
+    const platosHTML = data.map(plato => {
+      // Validar imagen
+      let imagen = 'assets/img_header_1.jpg';
+      if (plato.imageUrl && (plato.imageUrl.startsWith('http://') || plato.imageUrl.startsWith('https://'))) {
+        imagen = plato.imageUrl;
+      }
+      
+      const nombreDepartamento = plato.department && plato.department.name ? plato.department.name : 'No disponible';
+      const ingredientes = plato.ingredients || 'No disponible';
+      
+      return `
+        <article class="plato-card">
+          <div class="plato-image">
+            <img src="${imagen}" alt="${plato.name}" onerror="this.src='assets/img_header_1.jpg'" />
+          </div>
+          <div class="plato-content">
+            <h3>${plato.name}</h3>
+            <p class="plato-descripcion">${plato.description}</p>
+            <div class="plato-datos">
+              <div class="plato-dato full-width">
+                <span class="dato-label">Ingredientes</span>
+                <span class="dato-value">${ingredientes}</span>
+              </div>
+              <div class="plato-dato">
+                <span class="dato-label">Departamento</span>
+                <span class="dato-value">${nombreDepartamento}</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+    
+    container.innerHTML = platosHTML;
+    
+    console.log('✅ Platos típicos cargados:', data.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar platos típicos:', error);
+    container.innerHTML = '<p>Error al cargar los platos típicos. Por favor, intenta recargar la página.</p>';
   }
 }

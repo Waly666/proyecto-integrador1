@@ -145,28 +145,13 @@
 
       <section id="platos-tipicos">
         <header>
-          <h2>Platos típicos</h2>
+          <h2>Platos Típicos</h2>
         </header>
         <p>Gastronomía representativa por región y departamento.</p>
 
-        <ul data-endpoint="https://api-colombia.com/api/v1/Food" aria-live="polite">
-          <li>
-            <article>
-              <header><h3>Nombre del plato</h3></header>
-              <p></p>
-              <p></p>
-            </article>
-          </li>
-        </ul>
-
-        <template id="tpl-plato">
-          <li>
-            <article>
-              <header><h3></h3></header>
-              <p></p>
-            </article>
-          </li>
-        </template>
+        <div id="platos-tipicos-list" class="platos-grid" aria-live="polite">
+          <p>Cargando platos típicos...</p>
+        </div>
       </section>
     </main>
 
