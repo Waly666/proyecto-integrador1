@@ -44,21 +44,59 @@
 
         <article>
           <h3>Resumen</h3>
-          <p>Descripción breve del país. Aquí podrás insertar datos obtenidos de la API (población, capital, moneda, etc.).</p>
+          <p id="resumen-pais">Cargando descripción...</p>
 
-          <dl data-endpoint="https://api-colombia.com/api/v1/Country/Colombia" aria-live="polite">
-            <dt>Población</dt>
-            <dd></dd>
+          <div class="stats-grid" data-endpoint="https://api-colombia.com/api/v1/Country/Colombia" aria-live="polite">
+            <div class="stat-card">
+              <span class="stat-label">Población</span>
+              <span class="stat-value" id="poblacion">Cargando...</span>
+            </div>
 
-            <dt>Capital</dt>
-            <dd></dd>
+            <div class="stat-card">
+              <span class="stat-label">Capital</span>
+              <span class="stat-value" id="capital">Cargando...</span>
+            </div>
 
-            <dt>Moneda</dt>
-            <dd></dd>
+            <div class="stat-card">
+              <span class="stat-label">Superficie</span>
+              <span class="stat-value" id="superficie">Cargando...</span>
+            </div>
 
-            <dt>Idioma</dt>
-            <dd></dd>
-          </dl>
+            <div class="stat-card">
+              <span class="stat-label">Moneda</span>
+              <span class="stat-value" id="moneda">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Idiomas</span>
+              <span class="stat-value" id="idiomas">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Zona horaria</span>
+              <span class="stat-value" id="zona-horaria">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Prefijo telefónico</span>
+              <span class="stat-value" id="prefijo-telefonico">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Dominio internet</span>
+              <span class="stat-value" id="dominio-internet">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Región</span>
+              <span class="stat-value" id="region">Cargando...</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Países fronterizos</span>
+              <span class="stat-value" id="fronteras">Cargando...</span>
+            </div>
+          </div>
         </article>
       </section>
 
