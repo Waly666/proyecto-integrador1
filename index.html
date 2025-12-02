@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Colombia — Información, Regiones, Departamentos, Sitios turísticos y Platos típicos</title>
+    <meta name="description" content="Portal informativo de Colombia con datos generales, regiones, departamentos, sitios turísticos y platos típicos." />
+   <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ENCABEZADO PRINCIPAL -->
+    <header>
+      <h1>Colombia</h1>
+      <p>Explora información general, regiones, departamentos, sitios turísticos y platos típicos.</p>
+
+      <!-- Botón modo oscuro / claro -->
+      <button id="toggle-tema" type="button" aria-pressed="false">Modo oscuro</button>
+
+      <!-- Navegación principal -->
+      <nav aria-label="Secciones principales">
+        <ul>
+          <li><a href="#informacion-general">Información general</a></li>
+          <li><a href="#regiones">Regiones</a></li>
+          <li><a href="#departamentos">Departamentos</a></li>
+          <li><a href="#sitios-turisticos">Sitios turísticos</a></li>
+          <li><a href="#platos-tipicos">Platos típicos</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="contenido">
+      <section id="informacion-general">
+        <header>
+          <h2>Información general</h2>
+        </header>
+
+        <figure>
+          <img src="" alt="Mapa o imagen representativa de Colombia" />
+          <figcaption>Mapa de Colombia</figcaption>
+        </figure>
+
+        <article>
+          <h3>Resumen</h3>
+          <p>Descripción breve del país. Aquí podrás insertar datos obtenidos de la API (población, capital, moneda, etc.).</p>
+
+          <dl data-endpoint="https://api-colombia.com/api/v1/Country/Colombia" aria-live="polite">
+            <dt>Población</dt>
+            <dd></dd>
+
+            <dt>Capital</dt>
+            <dd></dd>
+
+            <dt>Moneda</dt>
+            <dd></dd>
+
+            <dt>Idioma</dt>
+            <dd></dd>
+          </dl>
+        </article>
+      </section>
+
+      <section id="regiones">
+        <header>
+          <h2>Regiones</h2>
+        </header>
+        <p>Listado de regiones naturales y administrativas de Colombia.</p>
+
+        <ul data-endpoint="https://api-colombia.com/api/v1/Region" aria-live="polite">
+          <li>
+            <article>
+              <h3>Nombre de la región</h3>
+              <p>Descripción breve de la región.</p>
+            </article>
+          </li>
+        </ul>
+
+        <template id="tpl-region">
+          <li>
+            <article>
+              <h3></h3>
+              <p></p>
+            </article>
+          </li>
+        </template>
+      </section>
+
+      <section id="departamentos">
+        <header>
+          <h2>Departamentos</h2>
+        </header>
+
+        <form role="search" aria-label="Buscar departamento">
+          <label for="busqueda-departamento">Buscar departamento:</label>
+          <input id="busqueda-departamento" name="q" type="search" />
+          <button type="submit">Buscar</button>
+        </form>
+
+        <ul data-endpoint="https://api-colombia.com/api/v1/Department" aria-live="polite">
+          <li>
+            <article>
+              <header>
+                <h3>Nombre del departamento</h3>
+                <p></p>
+              </header>
+              <p></p>
+            </article>
+          </li>
+        </ul>
+
+        <template id="tpl-departamento">
+          <li>
+            <article>
+              <header>
+                <h3></h3>
+                <p></p>
+              </header>
+              <p></p>
+            </article>
+          </li>
+        </template>
+      </section>
+
+      <section id="sitios-turisticos">
+        <header>
+          <h2>Sitios turísticos</h2>
+        </header>
+        <p>Principales atractivos turísticos del país.</p>
+
+        <ul data-endpoint="https://api-colombia.com/api/v1/TouristicAttraction" aria-live="polite">
+          <li>
+            <article>
+              <header>
+                <h3>Nombre del sitio</h3>
+              </header>
+              <figure>
+                <img src="" alt="Imagen ilustrativa del sitio turístico" />
+                <figcaption></figcaption>
+              </figure>
+              <p></p>
+            </article>
+          </li>
+        </ul>
+
+        <template id="tpl-atraccion">
+          <li>
+            <article>
+              <header>
+                <h3></h3>
+              </header>
+              <figure>
+                <img src="" alt="" />
+                <figcaption></figcaption>
+              </figure>
+              <p></p>
+            </article>
+          </li>
+        </template>
+      </section>
+
+      <section id="platos-tipicos">
+        <header>
+          <h2>Platos típicos</h2>
+        </header>
+        <p>Gastronomía representativa por región y departamento.</p>
+
+        <ul data-endpoint="https://api-colombia.com/api/v1/Food" aria-live="polite">
+          <li>
+            <article>
+              <header><h3>Nombre del plato</h3></header>
+              <p></p>
+              <p></p>
+            </article>
+          </li>
+        </ul>
+
+        <template id="tpl-plato">
+          <li>
+            <article>
+              <header><h3></h3></header>
+              <p></p>
+            </article>
+          </li>
+        </template>
+      </section>
+    </main>
+
+    <footer>
+      <nav aria-label="Enlaces de ayuda">
+        <ul>
+          <li><a href="#contenido">Volver arriba</a></li>
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Privacidad</a></li>
+        </ul>
