@@ -117,37 +117,18 @@
       <section id="departamentos">
         <header>
           <h2>Departamentos</h2>
+          <p>Explora los 33 departamentos de Colombia</p>
         </header>
 
-        <form role="search" aria-label="Buscar departamento">
-          <label for="busqueda-departamento">Buscar departamento:</label>
-          <input id="busqueda-departamento" name="q" type="search" />
+        <form role="search" aria-label="Buscar departamento" id="form-buscar-depto">
+          <label for="busqueda-departamento" class="visually-hidden">Buscar departamento:</label>
+          <input id="busqueda-departamento" name="q" type="search" placeholder="Buscar departamento..." />
           <button type="submit">Buscar</button>
         </form>
 
-        <ul data-endpoint="https://api-colombia.com/api/v1/Department" aria-live="polite">
-          <li>
-            <article>
-              <header>
-                <h3>Nombre del departamento</h3>
-                <p></p>
-              </header>
-              <p></p>
-            </article>
-          </li>
-        </ul>
-
-        <template id="tpl-departamento">
-          <li>
-            <article>
-              <header>
-                <h3></h3>
-                <p></p>
-              </header>
-              <p></p>
-            </article>
-          </li>
-        </template>
+        <div id="departamentos-grid" class="departamentos-grid" aria-live="polite">
+          <p>Cargando departamentos...</p>
+        </div>
       </section>
 
       <section id="sitios-turisticos">

@@ -139,7 +139,119 @@ async function fetchInfoGeneral() {
 document.addEventListener('DOMContentLoaded', () => {
   fetchInfoGeneral();
   fetchRegiones();
+  fetchDepartamentos();
 });
+
+// ==========================================
+// FETCH API - Departamentos de Colombia
+// ==========================================
+
+let todosDepartamentos = [];
+
+async function fetchDepartamentos(searchTerm = '') {
+  const endpoint = 'https://api-colombia.com/api/v1/Department';
+  const container = document.getElementById('departamentos-grid');
+  
+  if (!container) return;
+  
+  try {
+    // Si ya tenemos los datos y solo estamos filtrando
+    if (todosDepartamentos.length > 0 && searchTerm) {
+      renderDepartamentos(searchTerm);
+      return;
+    }
+    
+    container.innerHTML = '<p>Cargando departamentos...</p>';
+    
+    const response = await fetch(endpoint);
+    
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    todosDepartamentos = data;
+    
+    renderDepartamentos(searchTerm);
+    
+    console.log('✅ Departamentos cargados:', todosDepartamentos.length);
+    
+  } catch (error) {
+    console.error('❌ Error al cargar departamentos:', error);
+    container.innerHTML = '<p>Error al cargar los departamentos. Por favor, intenta recargar la página.</p>';
+  }
+}
+
+function renderDepartamentos(searchTerm = '') {
+  const container = document.getElementById('departamentos-grid');
+  if (!container) return;
+  
+  // Filtrar departamentos por búsqueda
+  let departamentos = todosDepartamentos;
+  if (searchTerm) {
+    departamentos = todosDepartamentos.filter(dept => 
+      dept.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+  
+  if (departamentos.length === 0) {
+    container.innerHTML = '<p class="no-results">No se encontraron departamentos con ese nombre.</p>';
+    return;
+  }
+  
+  // Crear HTML para cada departamento
+  const deptosHTML = departamentos.map(dept => `
+    <article class="depto-card">
+      <header class="depto-header">
+        <h3>${dept.name}</h3>
+        <p class="depto-descripcion">${dept.description || 'Sin descripción disponible.'}</p>
+      </header>
+      
+      <div class="depto-stats">
+        <div class="depto-stat">
+          <span class="stat-label-small">Capital</span>
+          <span class="stat-value-small">${dept.cityCapital?.name || 'N/D'}</span>
+        </div>
+        
+        <div class="depto-stat">
+          <span class="stat-label-small">Población</span>
+          <span class="stat-value-small">${dept.population ? dept.population.toLocaleString('es-CO') : 'N/D'}</span>
+        </div>
+        
+        <div class="depto-stat">
+          <span class="stat-label-small">Municipios</span>
+          <span class="stat-value-small">${dept.municipalities || 'N/D'}</span>
+        </div>
+        
+        <div class="depto-stat">
+          <span class="stat-label-small">Superficie</span>
+          <span class="stat-value-small">${dept.surface ? dept.surface.toLocaleString('es-CO') + ' km²' : 'N/D'}</span>
+        </div>
+      </div>
+    </article>
+  `).join('');
+  
+  container.innerHTML = deptosHTML;
+}
+
+// Event listener para búsqueda de departamentos
+const formBuscarDepto = document.getElementById('form-buscar-depto');
+const inputBuscarDepto = document.getElementById('busqueda-departamento');
+
+if (formBuscarDepto && inputBuscarDepto) {
+  formBuscarDepto.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const searchTerm = inputBuscarDepto.value.trim();
+    renderDepartamentos(searchTerm);
+  });
+  
+  // Búsqueda en tiempo real
+  inputBuscarDepto.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.trim();
+    renderDepartamentos(searchTerm);
+  });
+}
+
 
 // ==========================================
 // FETCH API - Regiones de Colombia

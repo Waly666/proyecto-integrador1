@@ -308,6 +308,143 @@ form[role="search"] {
   display: flex;
   gap: .5rem;
   align-items: center;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+input[type="search"] {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: .5rem;
+  padding: .65rem 1rem;
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+}
+
+form[role="search"] button {
+  padding: .65rem 1.25rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+form[role="search"] button:hover {
+  background: color-mix(in srgb, var(--accent) 85%, black);
+}
+
+/* Grid de departamentos */
+.departamentos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.depto-card {
+  background: var(--card);
+  border-radius: .85rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.depto-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.15);
+}
+
+.depto-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.depto-header h3 {
+  color: var(--accent);
+  margin: 0 0 .75rem 0;
+  font-size: 1.4rem;
+}
+
+.depto-descripcion {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: .9rem;
+  text-align: justify;
+  align-self: stretch;
+}
+
+/* Stats tipo cajitas como info general */
+.depto-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .75rem;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.depto-stat {
+  background: var(--bg);
+  padding: .85rem;
+  border-radius: .65rem;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  transition: transform 0.15s ease;
+}
+
+.depto-stat:hover {
+  transform: translateY(-1px);
+}
+
+.stat-label-small {
+  font-size: .7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--muted);
+}
+
+.stat-value-small {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+}
+
+/* Responsive para departamentos */
+@media (max-width: 768px) {
+  .departamentos-grid {
+    grid-template-columns: 1fr;
+  }
+}
   margin: 1rem 0;
 }
 input[type="search"] {
