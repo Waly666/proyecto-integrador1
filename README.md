@@ -6,7 +6,7 @@
 
 Aplicación web interactiva que consume la API pública de [api-colombia.com](https://api-colombia.com) para mostrar información completa y actualizada sobre Colombia, incluyendo datos geográficos, administrativos, turísticos y gastronómicos.
 
-**Proyecto Integrador** - DevSeniorCode  
+**Proyecto Integrador 1** - DevSeniorCode  
 **Módulo 1**: Web Foundations & Coding Skills  
 **Autor**: WALTER AGUILAR
 
@@ -112,83 +112,7 @@ Aplicación web interactiva que consume la API pública de [api-colombia.com](ht
 4. `/TouristicAttraction` - Sitios turísticos
 5. `/TypicalDish` - Platos típicos
 
----
-
-## 🚀 Guion para Video Demostración
-
-### 📍 Introducción (30 seg)
-> "Hola, soy Walter Aguilar y les presento mi Proyecto Integrador: una aplicación web sobre Colombia que consume datos en tiempo real de una API pública."
-
-### 🎨 Vista General del Diseño (45 seg)
-- **Mostrar header con gradiente y logo**
-  > "La aplicación cuenta con un diseño moderno inspirado en Shadcn/ui, con un header con gradiente azul vibrante y navegación principal."
-
-- **Demostrar navegación sidebar**
-  > "Implementé una barra lateral sticky para facilitar la navegación entre secciones."
-
-- **Mostrar tema oscuro**
-  > "Soporta modo claro y oscuro que se guarda en el navegador."
-
-### 📊 Sección de Información General (1 min)
-- **Scroll a la sección**
-  > "Aquí vemos datos generales de Colombia: población, capital, superficie, moneda..."
-
-- **Mostrar las tarjetas con gradiente azul**
-  > "Los datos se presentan en tarjetas con gradientes azules que en modo oscuro se adaptan automáticamente."
-
-### 🗺️ Regiones y Departamentos (1:30 min)
-- **Mostrar grid de regiones**
-  > "Las 6 regiones naturales se muestran en un grid responsive."
-
-- **Demostrar buscador de departamentos**
-  > "Para los 33 departamentos implementé un buscador en tiempo real."
-  - Escribir "Antioquia"
-  - Mostrar resultado filtrado
-
-- **Mostrar detalles de una tarjeta**
-  > "Cada departamento muestra su descripción, capital, población, municipios y superficie en tarjetas con espaciado optimizado."
-
-### 🏖️ Sitios Turísticos (1 min)
-- **Usar el buscador**
-  > "La sección de turismo incluye búsqueda por nombre o ciudad."
-  - Buscar "Cartagena"
-
-- **Mostrar grid de 3 columnas**
-  > "Los sitios se organizan en un grid de 3 columnas en desktop, adaptándose a 1 columna en móvil."
-
-### 🍲 Gastronomía (45 seg)
-- **Demostrar búsqueda de platos**
-  > "Podemos buscar platos típicos por nombre o departamento de origen."
-  - Buscar "Bandeja"
-
-- **Mostrar detalles**
-  > "Cada plato incluye categoría, descripción, ingredientes e imagen cuando está disponible."
-
-### 📱 Responsive Design (45 seg)
-- **Abrir DevTools**
-  > "El diseño es completamente responsive."
-
-- **Cambiar a vista móvil**
-  > "En móvil, los grids se adaptan a 1 columna y la navegación se optimiza."
-
-- **Mostrar vista tablet**
-  > "En tablet usamos 2 columnas para mejor aprovechamiento del espacio."
-
-### 💻 Aspectos Técnicos (1 min)
-- **Mostrar código brevemente (opcional)**
-  > "El proyecto usa JavaScript vanilla para consumir 5 endpoints diferentes de la API."
-
-- **Mencionar características técnicas**
-  > "Implementé manejo de errores, validación de imágenes, y búsqueda con filtrado en tiempo real sin recargar la página."
-
-### 🎯 Footer y Cierre (30 seg)
-- **Scroll al footer**
-  > "El footer tiene gradiente azul oscuro con navegación completa en color fucsia."
-
-- **Conclusión**
-  > "Este proyecto integrador demuestra el uso de HTML semántico, CSS moderno con variables y grid, y JavaScript para consumo de APIs. Gracias por ver la demostración."
-
----
+-----
 
 ## 📦 Instalación y Uso
 
